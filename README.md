@@ -1,6 +1,6 @@
-# firewall
-iptables rules for firewall
-
+# Firewall
+iptables rules
+---
 >**Firewall Script:**
 ```javascript
 #!/bin/bash
