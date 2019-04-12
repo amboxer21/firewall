@@ -1,7 +1,6 @@
 # Firewall
-iptables rules
 ---
->**Firewall Script:**
+>**Iptables Rules:**
 ```javascript
 #!/bin/bash
 ### BEGIN INIT INFO
