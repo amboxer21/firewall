@@ -1,10 +1,10 @@
 #!/bin/bash
 ### BEGIN INIT INFO
 # Provides:          iptables.sh
-# Required-Start:    $local_fs $remote_fs
-# Required-Stop:     $local_fs $remote_fs
-# Should-Start:      $time $network $syslog iptables firehol shorewall ipmasq arno-iptables-firewall iptables-persistent ferm
-# Should-Stop:       $network $syslog iptables firehol shorewall ipmasq arno-iptables-firewall iptables-persistent ferm
+# Required-Start:    mountkernfs $local_fs
+# Required-Stop:     $local_fs
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
 # Short-Description: Script to add default preferred iptable rules.
