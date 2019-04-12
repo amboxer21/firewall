@@ -1,6 +1,6 @@
-# Firewall
+# Firewall(iptables)
 
->**Iptables Rules:**
+>**/etc/init.d/iptables.sh:**
 ```javascript
 #!/bin/bash
 ### BEGIN INIT INFO
@@ -34,5 +34,43 @@
 for port in 25 53 80 443 587; do /sbin/iptables -v -A OUTPUT -p tcp --dport $port -j ACCEPT; done
 for port in 80 443 667 1199 7298; do /sbin/iptables -v -A INPUT -p tcp --dport $port -j ACCEPT; done
 for port in 23 25 587; do /sbin/iptables -v -A INPUT -p tcp --dport $port -j REJECT; done
+```
 
+To start the firewall, run:
+
+    codecaine21@codecaine21 ~ $ sudo /etc/init.d/iptables.sh
+    
+To add the firewall to startup, run:
+```javascript
+codecaine21@codecaine21 ~ $ sudo update-rc.d iptables.sh defaults
+ Adding system startup for /etc/init.d/iptables.sh ...
+   /etc/rc0.d/K20iptables.sh -> ../init.d/iptables.sh
+   /etc/rc1.d/K20iptables.sh -> ../init.d/iptables.sh
+   /etc/rc6.d/K20iptables.sh -> ../init.d/iptables.sh
+   /etc/rc2.d/S20iptables.sh -> ../init.d/iptables.sh
+   /etc/rc3.d/S20iptables.sh -> ../init.d/iptables.sh
+   /etc/rc4.d/S20iptables.sh -> ../init.d/iptables.sh
+   /etc/rc5.d/S20iptables.sh -> ../init.d/iptables.sh
+codecaine21@codecaine21 ~ $
+```
+
+To remove the firewall from boot:
+```javascript
+codecaine21@codecaine21 ~ $ sudo update-rc.d -f iptables.sh remove
+ Removing any system startup links for /etc/init.d/iptables.sh ...
+   /etc/rc0.d/K20iptables.sh
+   /etc/rc1.d/K20iptables.sh
+   /etc/rc2.d/S20iptables.sh
+   /etc/rc3.d/S20iptables.sh
+   /etc/rc4.d/S20iptables.sh
+   /etc/rc5.d/S20iptables.sh
+   /etc/rc6.d/K20iptables.sh
+codecaine21@codecaine21 ~ $
+```
+
+Script was developed on:
+```javascript
+codecaine21@codecaine21 ~ $ readarray -t arr < <(lsb_release -irs); echo "${arr[*]}"
+LinuxMint 17
+codecaine21@codecaine21 ~ $
 ```
