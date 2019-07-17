@@ -16,7 +16,7 @@
 
 # Author: Anthony Guevara <amboxer21@gmail.com>
 
-wired_iface = `ifconfig | awk -F: '/^e[a-z0-9]*/{print $1}' | head -n1`
+wired_iface=`ifconfig | awk -F: '/^e[a-z0-9]*/{print $1}' | head -n1`
 
 /sbin/iptables --flush
 
