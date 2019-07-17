@@ -16,11 +16,13 @@
 
 # Author: Anthony Guevara <amboxer21@gmail.com>
 
+wired_iface = `ifconfig | awk -F: '/^e[a-z0-9]*/{print $1}' | head -n1`
+
 /sbin/iptables --flush
 
 # Used to forward remote VPN traffic through gateway
-sudo iptables -A FORWARD -p tcp -i tun0 -o enp0s25 -s 10.8.0.0/24 -j ACCEPT
-sudo iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o enp0s25 -j MASQUERADE
+sudo iptables -A FORWARD -p tcp -i tun0 -o $wired_iface -s 10.8.0.0/24 -j ACCEPT
+sudo iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o $wired_iface -j MASQUERADE
 
 /sbin/iptables -v -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
 /sbin/iptables -v -A INPUT -p tcp --dport 80 -j ACCEPT
